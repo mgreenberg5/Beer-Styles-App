@@ -26,4 +26,3 @@
 * [SASS](http://sass-lang.com/), using the scss syntax and the [7-1 architecture pattern](http://sass-guidelin.es/#architecture) and sticking to [Sass Guidelines](http://sass-guidelin.es) writing conventions.
 * [html-brunch-static](https://github.com/bmatcuk/html-brunch-static) enables [handlebars](http://handlebarsjs.com/) precompiled templates.
 * [postcss](https://github.com/postcss/postcss) [autoprefixer](https://github.com/postcss/autoprefixer) uses [can-i-use](http://caniuse.com/) to vendor prefix current CSS spec for backward compatibility.
-# WebApp
