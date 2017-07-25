@@ -1,9 +1,5 @@
-<title>{{#if title}}{{title}}{{else}}-----{{/if}}</title> {{!-- TODO --}}
+<title>{{#if title}}{{title}}{{else}}WebApp{{/if}}</title>
 
-<meta property="og:image" content=""/> {{!-- TODO --}}
-<meta property="og:title" content="{{#if og-title}}{{og-title}}{{else}}-----{{/if}}" /> {{!-- TODO --}}
-<meta property="og:description" content="{{#if og-description}}{{og-description}}{{else}}-----{{/if}}" /> {{!-- TODO --}}
-<meta property="og:url" content="{{#if og-url}}{{og-url}}{{else}}-----{{/if}}"/> {{!-- TODO --}}
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
 <meta name="description" content="">
@@ -11,12 +7,6 @@
 
 <link rel="stylesheet" href="/css/style.css" type="text/css"/>
 <link rel="icon" href="/images/favicon.png" type="image/ico">
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
 
-<script type="text/javascript">
-  window.onload = function() {
-    $.get('//fonts.googleapis.com/css?family=Roboto:300,400,500,700', function (data) {
-      $('head').append($('<style>').html(data));
-    });
-  }
-</script>
 <script src="/js/app.js" onload="require('initialize');" ></script>
