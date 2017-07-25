@@ -1,0 +1,18 @@
+---
+_options:
+  partials:
+    - app/partials/head.static.hbs
+    - app/partials/header.static.hbs
+    - app/partials/footer.static.hbs
+---
+<!DOCTYPE html>
+<html>
+  {{>head}}
+  <body {{#if page-class}}class="{{page-class}}"{{/if~}}>
+    {{>header}}
+    <main>
+      {{content}}
+    </main>
+    {{>footer}}
+  </body>
+</html>
