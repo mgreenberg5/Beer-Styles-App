@@ -21,15 +21,13 @@ exports.config = {
   files: {
     javascripts: {
       joinTo: {
-        'js/app.js': [
-          /^(?!app)/,
-          /^app/
-        ]
+        'javascripts/vendor.js': /^(?!app)/,
+        'javascripts/app.js': /^app/
       }
     },
     stylesheets: {
       joinTo: {
-        'css/style.css' : 'app/stylesheets/main.scss'
+        'stylesheets/style.css' : 'app/stylesheets/main.scss'
       }
     }
   },

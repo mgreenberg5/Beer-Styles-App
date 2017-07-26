@@ -9,9 +9,9 @@ html, body {
 section {
   position: relative;
   width: 100%;
-  padding-top: 64px;
+  padding-top: 50px;
   @media #{$min-768} {
-    padding-top: 128px;
+    padding-top: 100px;
   }
   &.no-inner-spacing {
     padding-top: 0;
@@ -25,7 +25,7 @@ section {
   padding: 0 32px;
   box-sizing: border-box;
   @media #{$min-768} {
-    padding: 0 64px;
+    padding: 0 50px;
   }
   &:after {
     margin: 0;
@@ -51,18 +51,9 @@ section {
 .column, .columns {
   width: 100%;
   float: left;
-  margin-bottom: 64px;
+  margin-bottom: 50px;
   @media #{$min-768} {
-    margin-bottom: 128px;
-    &.condensed-desktop-margin {
-      margin-bottom: 64px;
-    }
-  }
-  &.no-margin-bottom {
-    margin-bottom: 0;
-  }
-  & > *:last-child {
-    margin-bottom: 0;
+    margin-bottom: 100px;
   }
   @media #{$min-1024} {
     margin-left: 4%;
