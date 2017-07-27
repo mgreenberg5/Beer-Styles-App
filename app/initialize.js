@@ -1,3 +1,5 @@
+import { HomePage } from 'scripts/homePage.js'
+
 document.addEventListener('DOMContentLoaded', () => {
-	console.log("fire")
+    new HomePage();
 });
