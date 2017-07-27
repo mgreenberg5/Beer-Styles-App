@@ -5,8 +5,12 @@ class BreweryDB {
   }
 
   fetchStyles() {
-    console.log("fire")
     var api = 'styles/';
+    return this.get(api);
+  }
+
+  fetchCategories() {
+    var api = 'categories/';
     return this.get(api);
   }
 
