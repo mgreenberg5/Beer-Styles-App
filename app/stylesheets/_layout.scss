@@ -22,7 +22,7 @@ section {
   width: 100%;
   position: relative;
   margin: 0 auto;
-  padding: 0 32px;
+  padding: 0 30px;
   box-sizing: border-box;
   @media #{$min-768} {
     padding: 0 50px;
@@ -157,4 +157,9 @@ section {
   content: "";
   display: table;
   clear: both;
+}
+// SECTIION COLORS
+//-----------------------------------------------------------------
+.light-gray-background {
+  background-color: $light-gray
 }

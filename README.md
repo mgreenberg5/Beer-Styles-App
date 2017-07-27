@@ -7,7 +7,7 @@
 
 ### Initialize
 * Once Node.js and Brunch are installed,
-* Clone this git repo `git@github.com:dmgctrl/Tonic-Website-Redesign-2017.git`
+* Clone this git repo `https://github.com/mgreenberg5/WebApp`
 * Run `npm install` to install app dependencies and brunch plugins
 
 ### Configure:
