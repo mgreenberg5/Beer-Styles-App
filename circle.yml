@@ -8,7 +8,7 @@ machine:
     version: 2.0.0-p648
 test:
   override:
-    - npm start
+    - brunch build --production
 deployment:
   production:
     branch: master

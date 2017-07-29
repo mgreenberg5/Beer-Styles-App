@@ -30,8 +30,7 @@ class HomePage {
     $('.beer-card-container').show();
   }
 
-  populateBeerDataFailed(error) {
-    this.hideLoader();
+  populateBeerDataFailed() {
     var errorMessage  = [
         '<div class="twelve columns text-center">',
           '<h1>Oops Something Went Wrong</h1>',
@@ -39,6 +38,7 @@ class HomePage {
       ].join('');
     $(".beer-list").append(errorMessage);
     this.displayBeerCardContainer();
+    this.hideLoader();
   }
 
   populateQuestionOne() {
