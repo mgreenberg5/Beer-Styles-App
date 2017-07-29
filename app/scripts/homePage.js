@@ -3,13 +3,13 @@ import { BreweryDB } from 'scripts/breweryDB.js'
 
 class HomePage {
   constructor() {
+    this.selectedCategoryStyle = null;
     this.beerData = null;
     this.bindEvents();
     this.breweryDB = new BreweryDB();
     this.breweryDB.fetchStyles()
-      .then((data) => { this.populateBeerData(data); })
-      .catch((error) => { this.populateBeerDataFailed(error);
-    });
+      .then((data) => { this.populateBeerData(data);})
+      .catch((error) => { this.populateBeerDataFailed(error);});
   }
 
   populateBeerData(data) {
@@ -44,6 +44,11 @@ class HomePage {
     select.find('option').remove();
   }
 
+  resetBeerList() {
+    $('.beer-list').find('.flip-container').remove();
+    $('.pagination').children().remove();
+  }
+
   handleQuestionOneAction() {
     var questionTwo = $('.question-two');
     var selectedCategory = $('.question-one').val();
@@ -59,35 +64,48 @@ class HomePage {
   }
 
   handleQuestionTwoAction() {
-    var selectedCategoryStyle = $('.question-two').val();
-    var paramaters = '&styleId='+ selectedCategoryStyle + '&p=1&sort=ASC'
+    this.selectedCategoryStyle = $('.question-two').val();
+    var paramaters = '&styleId='+ this.selectedCategoryStyle + '&p=1&sort=ASC'
     this.breweryDB.fetchBeers(paramaters)
-      .then((data) => { this.populateBeerContainer(data); })
-      .catch((error) => { this.populateBeerDataFailed(error);
-    });
+      .then((data) => { this.populateBeerContainer(data);})
+      .catch((error) => { this.populateBeerDataFailed(error);});
     $('.beer-card-container').show();
   }
 
+  createPaging(data) {
+    for (var i = 1; i < data.numberOfPages; i++) {
+      var page = '<a class="page-number" data-page-number='+[i]+'>' + i + '</a>'
+      $('.pagination').append(page);
+    }
+  }
+
   populateBeerContainer(data) {
-    console.log(data)
+    this.resetBeerList();
     _.forEach(data.data, function(beer) {
-      var available = (typeof beer.available == 'undefined') ? null : beer.available.name
-      var glass = (typeof beer.glass == 'undefined') ? null : beer.glass.name
-      var label = (typeof beer.labels == 'undefined') ? '/images/default-label.png' : beer.labels.medium
+      var logo = (typeof beer.labels == 'undefined') ? '/images/default-label.png' : beer.labels.medium
+      var availableHTML = (typeof beer.available == 'undefined') ? '' : '<p class="available">Availability: <span class="bold">' + beer.available.name + '</span></p>';
+      var abvHTML = (typeof beer.abv == 'undefined') ? '' : '<p class="abv">ABV: <span class="bold">' + beer.abv + '</span></p>';
+      var ibuHTML = (typeof beer.ibu == 'undefined') ? '' : '<p class="ibu">IBU: <span class="bold">' + beer.ibu + '</span></p>';
+      var ibuHTML = (typeof beer.ibu == 'undefined') ? '' : '<p class="ibu">IBU: <span class="bold">' + beer.ibu + '</span></p>';
+      var glassHTML = (typeof beer.glass == 'undefined') ? '' : '<h5 class="glass">Serving: ' + beer.glass.name + '</h5>';
+      var descriptionHTML = (typeof beer.glass == 'undefined') ? '' : '<h5 class="glass">Serving: ' + beer.description + '</h5>';
+      var flipArrowHTML = (typeof beer.glass == 'undefined' && typeof beer.glass == 'undefined') ? '' : '<img class="flip-arrow" src="/images/flip-arrow.png">';
       var beerCard = [
-        '<div class="three columns md-break flip-container">',
+        '<div class="column flip-container">',
           '<div class="flipper">',
             '<div class="front">',
-              '<img class="logo" src="' + label + '"/>',
-              '<h3 class="name">' + beer.name + 't</h3>',
-              '<p class="available">Availability: <span class="bold">' + available + '</span></p>',
-              '<p class="abv">ABV: <span class="bold">' + beer.abv + '</span></p>',
-              '<p class="ibu">IBU: <span class="bold">' + beer.ibu + '</span></p>',
-              '<img class="flip-arrow" src="/images/flip-arrow.png">',
+              '<img class="logo" src="' + logo + '"/>',
+              '<h3 class="name">' + beer.name + '</h3>',
+              availableHTML,
+              abvHTML,
+              ibuHTML,
+              flipArrowHTML,
             '</div>',
             '<div class="back">',
-              '<h5 class="glass">Serving: ' + glass + '</h5>',
-              '<h5 class="description">' + beer.description + '</h5>',
+              '<div class="scroll-container">',
+                glassHTML,
+                descriptionHTML,
+              '</div>',
               '<img class="flip-arrow" src="/images/flip-arrow.png">',
             '</div>',
           '</div>',
@@ -95,16 +113,27 @@ class HomePage {
       ].join('');
       $('.beer-list').append(beerCard);
     })
+    this.createPaging(data);
     this.bindEventsGeneratedContent();
+
+  }
+  handlePageClick() {
+    var page = $(event.target).data('page-number');
+    var paramaters = '&styleId='+ this.selectedCategoryStyle + '&p='+ page + '&sort=ASC'
+    this.breweryDB.fetchBeers(paramaters)
+      .then((data) => { this.populateBeerContainer(data);})
+      .catch((error) => { this.populateBeerDataFailed(error);});
   }
 
   handleCardFlip () {
-    $(this).toggleClass('flipped');
+    $(event.target).closest('.flip-container').toggleClass('flipped');
   }
 
   bindEventsGeneratedContent () {
-    $('.flip-container').on('click', this.handleCardFlip);
+    $('.flip-arrow').on('click', this.handleCardFlip.bind(this));
+    $('.page-number').on('click', this.handlePageClick.bind(this));
   }
+
   bindEvents() {
     $('.question-one').on('change', this.handleQuestionOneAction.bind(this));
     $('.question-two').on('change', this.handleQuestionTwoAction.bind(this));

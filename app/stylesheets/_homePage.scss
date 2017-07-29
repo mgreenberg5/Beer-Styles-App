@@ -63,7 +63,31 @@
   color: $white;
   transform: rotateY(-180deg);
 }
+.scroll-container {
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  height: 100%;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
 .flip-container {
+  &.column {
+    width: 100%;
+    float: left;
+    margin-bottom: 50px;
+    @media #{$min-768} {
+      width: 46%;
+      margin-left: 2%;
+      margin-right: 2%;
+      margin-bottom: 100px;
+    }
+    @media #{$min-1024} {
+      width: 21%;
+      margin-left: 2%;
+      margin-right: 2%;
+    }
+  }
   .logo {
     max-height: 75px;
     margin-bottom: 10px;
@@ -80,7 +104,16 @@
     width: 25px;
   }
 }
-
+.beer-card-container {
+  .pagination {
+    display: inline-block;
+    text-align: center;
+    a {
+      display: inline-block;
+      margin: 0 10px;
+    }
+  }
+}
 
 
 
