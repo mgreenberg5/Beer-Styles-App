@@ -1,0 +1,17 @@
+general:
+  build_dir: /
+dependencies:
+  pre:
+    - npm install
+machine:
+  ruby:
+    version: 2.0.0-p648
+test:
+  override:
+    - npm start
+deployment:
+  production:
+    branch: master
+    commands:
+      - brunch build --production
+      - aws s3 sync build s3://beer-app.com --delete

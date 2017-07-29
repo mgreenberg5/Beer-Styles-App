@@ -1,7 +1,8 @@
 class BreweryDB {
   constructor() {
     this.breweryDBBaseUrl = 'http://api.brewerydb.com/v2/';
-    this.breweryDBKey = '414a79b8f85458301dac5d28d7e234de'; //TODO remove from front-end
+    this.breweryDBKey = '402868022acc9333c88e21f3a1e6a390' //TODO remove from front-end TONIC
+    // this.breweryDBKey = '414a79b8f85458301dac5d28d7e234de'; //TODO remove from front-end GMAIL
   }
 
   fetchStyles() {
