@@ -1,7 +1,7 @@
 .question-lable {
   text-transform: uppercase;
 }
-.question-one-container{
+.question-one-container {
   margin-bottom: 50px;
 }
 .question-two-container {
@@ -9,6 +9,20 @@
 }
 .beer-card-container {
   display: none;
+  .pagination {
+    display: inline-block;
+    text-align: center;
+    a {
+      padding: 5px;
+      min-width: 25px;
+      display: inline-block;
+      border-radius: 5px;
+      &.selected {
+        background-color: $medium-gray;
+        color: $white;
+      }
+    }
+  }
 }
 // FLIP CONTAINER FUNCTIONALITY
 //-----------------------------------------------------------------
@@ -111,41 +125,3 @@
     width: 20px;
   }
 }
-.beer-card-container {
-  .pagination {
-    display: inline-block;
-    text-align: center;
-    a {
-      padding: 5px;
-      min-width: 25px;
-      display: inline-block;
-      border-radius: 5px;
-      &.selected {
-        background-color: $medium-gray;
-        color: $white;
-      }
-    }
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
