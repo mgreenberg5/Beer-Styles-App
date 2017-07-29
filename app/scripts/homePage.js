@@ -21,12 +21,17 @@ class HomePage {
     $('.beer-card-container').hide();
   }
 
+  hideLoader() {
+    $('.loader-container').hide();
+  }
+
   displayBeerCardContainer() {
     $('.loader-container').show();
     $('.beer-card-container').show();
   }
 
   populateBeerDataFailed(error) {
+    this.hideLoader();
     var errorMessage  = [
         '<div class="twelve columns text-center">',
           '<h1>Oops Something Went Wrong</h1>',
@@ -109,7 +114,7 @@ class HomePage {
   }
 
   populateBeerContainer(data) {
-    $('.loader-container').hide();
+    this.hideLoader();
     _.forEach(data.data, function(beer) {
       var logo = (typeof beer.labels == 'undefined') ? '/images/default-label.png' : beer.labels.medium
       var availableHTML = (typeof beer.available == 'undefined') ? '' : '<p class="available">Availability: <span class="bold">' + beer.available.name + '</span></p>';
