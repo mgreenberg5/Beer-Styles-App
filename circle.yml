@@ -14,4 +14,4 @@ deployment:
     branch: master
     commands:
       - brunch build --production
-      - aws s3 sync build s3://beer-app.com --delete
+      - aws s3 sync build s3://beer-app --delete
