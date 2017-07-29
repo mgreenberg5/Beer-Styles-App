@@ -9,33 +9,22 @@ class BreweryDB {
     return this.get(api);
   }
 
-  fetchCategories() {
-    var api = 'categories/';
-    return this.get(api);
+  fetchBeers(paramaters) {
+    var api = 'beers/';
+    return this.get(api, paramaters);
   }
 
-  get(api) {
-    var url = this.breweryDBBaseUrl + api + '?format=json&key=' + this.breweryDBKey
-    console.log(url)
-    return $.ajax({
-      url: this.breweryDBBaseUrl + api + '?format=json&key=' + this.breweryDBKey
-    }).promise();
+  get(api, paramaters) {
+    if(typeof paramaters == "undefined") {
+      return $.ajax({
+        url: this.breweryDBBaseUrl + api + '?format=json&key=' + this.breweryDBKey
+      }).promise();
+    } else {
+      return $.ajax({
+        url: this.breweryDBBaseUrl + api + '?format=json&key=' + this.breweryDBKey + paramaters
+      }).promise();
+    }
   }
-
-  // submitApplication(id, data) {
-  //   var api = 'openings/' + id + '/apply';
-  //   return this.post(api, data);
-  // }
-
-  // post(api, payLoad) {
-  //   return $.ajax({
-  //     url: this.breweryDBBaseUrl + api + '/?client_name=' + this.breweryDBKey,
-  //     data: JSON.stringify(payLoad),
-  //     contentType: 'application/json',
-  //     dataType: 'json',
-  //     type: 'POST'
-  //   }).promise();
-  // }
 }
 
 export { BreweryDB }

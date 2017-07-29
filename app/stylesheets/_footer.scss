@@ -1,6 +1,6 @@
 footer {
+  background-color: $dark-gray;
+  text-transform: uppercase;
+  color: $white;
   padding: 50px 0;
-  @media #{$min-768} {
-    padding: 100px 0;
-  }
 }
