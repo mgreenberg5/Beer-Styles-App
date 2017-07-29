@@ -69,9 +69,25 @@ class HomePage {
   }
 
   populateBeerContainer(data) {
-
-
-    debugger
+    console.log(data)
+    _.forEach(data.data, function(beer) {
+      var available = (typeof beer.available == 'undefined') ? null : beer.available.name
+      var glass = (typeof beer.glass == 'undefined') ? null : beer.glass.name
+      var label = (typeof beer.labels == 'undefined') ? null : beer.labels.icon
+      var beerCard = [
+          '<div class="three columns md-break">',
+            '<img src="' + label + '"></h5>',
+            '<h5 class="">' + beer.name + '</h5>',
+            '<h5 class="">' + beer.abv + '</h5>',
+            '<h5 class="">' + beer.ibu + '</h5>',
+            '<h5 class="">' + beer.description + '</h5>',
+            '<h5 class="">' + beer.isOrganic + '</h5>',
+            '<h5 class="">' + available + '</h5>',
+            '<h5 class="">' + glass + '</h5>',
+          '</div>'
+      ].join('');
+      $('.beer-list').append(beerCard);
+    })
 
   }
 
