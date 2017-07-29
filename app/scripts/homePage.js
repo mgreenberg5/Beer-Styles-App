@@ -9,7 +9,7 @@ class HomePage {
     this.breweryDB = new BreweryDB();
     this.breweryDB.fetchStyles()
       .then((data) => { this.populateBeerData(data);})
-      .catch((error) => { this.populateBeerDataFailed(error);});
+      .catch((error) => { this.populateBeerDataFailed();});
   }
 
   populateBeerData(data) {
@@ -17,13 +17,23 @@ class HomePage {
     this.populateQuestionOne();
   }
 
-  populateBeerDataFailed() {
+  hideBeerCardContainer() {
+    $('.beer-card-container').hide();
+  }
+
+  displayBeerCardContainer() {
+    $('.loader-container').show();
+    $('.beer-card-container').show();
+  }
+
+  populateBeerDataFailed(error) {
     var errorMessage  = [
         '<div class="twelve columns text-center">',
           '<h1>Oops Something Went Wrong</h1>',
         '</div>'
       ].join('');
-    $("#beer-list").append(errorMessage);
+    $(".beer-list").append(errorMessage);
+    this.displayBeerCardContainer();
   }
 
   populateQuestionOne() {
@@ -52,6 +62,8 @@ class HomePage {
   handleQuestionOneAction() {
     var questionTwo = $('.question-two');
     var selectedCategory = $('.question-one').val();
+    this.hideBeerCardContainer();
+    this.resetBeerList();
     this.resetSelectOptions(questionTwo);
     this.appendPlaceholderOption(questionTwo);
     _.forEach(this.beerData.data, function(categoryStyle) {
@@ -66,21 +78,38 @@ class HomePage {
   handleQuestionTwoAction() {
     this.selectedCategoryStyle = $('.question-two').val();
     var paramaters = '&styleId='+ this.selectedCategoryStyle + '&p=1&sort=ASC'
+    this.resetBeerList();
+    this.displayBeerCardContainer();
     this.breweryDB.fetchBeers(paramaters)
       .then((data) => { this.populateBeerContainer(data);})
       .catch((error) => { this.populateBeerDataFailed(error);});
-    $('.beer-card-container').show();
   }
 
+  handlePageClick() {
+    var page = $(event.target).data('page-number');
+    var paramaters = '&styleId='+ this.selectedCategoryStyle + '&p='+ page + '&sort=ASC'
+    this.resetBeerList();
+    this.displayBeerCardContainer();
+    this.breweryDB.fetchBeers(paramaters)
+      .then((data) => { this.populateBeerContainer(data);})
+      .catch((error) => { this.populateBeerDataFailed(error);});
+  }
+
+
   createPaging(data) {
-    for (var i = 1; i < data.numberOfPages; i++) {
-      var page = '<a class="page-number" data-page-number='+[i]+'>' + i + '</a>'
+    if(data.numberOfPages == 1){ return; }
+    for (var i = 1; i <= data.numberOfPages; i++) {
+      if(data.currentPage == i) {
+        var page = '<a class="page-number selected" data-page-number='+ i +'>' + i + '</a>'
+      } else {
+        var page = '<a class="page-number" data-page-number='+ i +'>' + i + '</a>'
+      }
       $('.pagination').append(page);
     }
   }
 
   populateBeerContainer(data) {
-    this.resetBeerList();
+    $('.loader-container').hide();
     _.forEach(data.data, function(beer) {
       var logo = (typeof beer.labels == 'undefined') ? '/images/default-label.png' : beer.labels.medium
       var availableHTML = (typeof beer.available == 'undefined') ? '' : '<p class="available">Availability: <span class="bold">' + beer.available.name + '</span></p>';
@@ -106,7 +135,7 @@ class HomePage {
                 glassHTML,
                 descriptionHTML,
               '</div>',
-              '<img class="flip-arrow" src="/images/flip-arrow.png">',
+              '<img class="flip-arrow" src="/images/flip-arrow-white.png">',
             '</div>',
           '</div>',
         '</div>'
@@ -116,13 +145,6 @@ class HomePage {
     this.createPaging(data);
     this.bindEventsGeneratedContent();
 
-  }
-  handlePageClick() {
-    var page = $(event.target).data('page-number');
-    var paramaters = '&styleId='+ this.selectedCategoryStyle + '&p='+ page + '&sort=ASC'
-    this.breweryDB.fetchBeers(paramaters)
-      .then((data) => { this.populateBeerContainer(data);})
-      .catch((error) => { this.populateBeerDataFailed(error);});
   }
 
   handleCardFlip () {

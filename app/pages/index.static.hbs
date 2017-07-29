@@ -3,18 +3,20 @@ title: Home
 page-class: home
 _options:
   layout: app/layouts/main.static.hbs
+  partials:
+    - app/partials/loader.static.hbs
 ---
 <section>
-  <div class="container">
+  <div class="container-condensed">
     <div class="row">
       <div class="twelve columns">
         <form>
           <div class="form-element question-one-container">
-            <h3>Choose a beer category</h3>
+            <h3 class="question-lable">Choose a style of beer</h3>
             <select class="question-one"></select>
           </div>
           <div class="form-element question-two-container">
-            <h3>Choose a sub category within this category</h3>
+            <h3 class="question-lable">Refine your decision</h3>
             <select class="question-two"></select>
           </div>
         </form>
@@ -24,7 +26,8 @@ _options:
 </section>
 <section class="beer-card-container light-gray-background">
   <div class="container">
-    <div class="twelve columns pagination"></div>
+    {{>loader}}
     <div class="beer-list" class="row"></div>
+    <div class="twelve columns pagination"></div>
   </div>
 </section>

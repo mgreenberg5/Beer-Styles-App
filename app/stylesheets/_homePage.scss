@@ -1,9 +1,15 @@
+.question-lable {
+  text-transform: uppercase;
+}
+.question-one-container{
+  margin-bottom: 50px;
+}
 .question-two-container {
   display: none;
 }
-// .beer-card-container {
-//   display: none;
-// }
+.beer-card-container {
+  display: none;
+}
 // FLIP CONTAINER FUNCTIONALITY
 //-----------------------------------------------------------------
 .flip-container {
@@ -98,10 +104,11 @@
     margin: 0 10px;
   }
   .flip-arrow {
+    cursor: pointer;
     position: absolute;
     bottom: 5px;
     right: 5px;
-    width: 25px;
+    width: 20px;
   }
 }
 .beer-card-container {
@@ -109,8 +116,14 @@
     display: inline-block;
     text-align: center;
     a {
+      padding: 5px;
+      min-width: 25px;
       display: inline-block;
-      margin: 0 10px;
+      border-radius: 5px;
+      &.selected {
+        background-color: $medium-gray;
+        color: $white;
+      }
     }
   }
 }
