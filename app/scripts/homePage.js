@@ -12,11 +12,6 @@ class HomePage {
       .catch((error) => { this.populateBeerDataFailed();});
   }
 
-  populateBeerData(data) {
-    this.beerData = data;
-    this.populateQuestionOne();
-  }
-
   hideBeerCardContainer() {
     $('.beer-card-container').hide();
   }
@@ -25,9 +20,14 @@ class HomePage {
     $('.loader-container').hide();
   }
 
-  displayBeerCardContainer() {
+  showBeerCardContainer() {
     $('.loader-container').show();
     $('.beer-card-container').show();
+  }
+
+  populateBeerData(data) {
+    this.beerData = data;
+    this.populateQuestionOne();
   }
 
   populateBeerDataFailed() {
@@ -37,80 +37,22 @@ class HomePage {
         '</div>'
       ].join('');
     $(".beer-list").append(errorMessage);
-    this.displayBeerCardContainer();
+    this.showBeerCardContainer();
     this.hideLoader();
+  }
+
+  populatePlaceholderOption(select){
+    select.append('<option disabled selected value> -- select an option -- </option>');
   }
 
   populateQuestionOne() {
     var questionOne = $('.question-one');
     var uniqueBeerCategories = _.uniqBy(this.beerData.data, 'categoryId');
-    this.appendPlaceholderOption(questionOne);
+    this.populatePlaceholderOption(questionOne);
     _.forEach(uniqueBeerCategories, function(beerCategory) {
       var categoryOption = '<option value="' + beerCategory.categoryId + '">'+ beerCategory.category.name + '</option>'
       questionOne.append(categoryOption);
     })
-  }
-
-  appendPlaceholderOption(select){
-    select.append('<option disabled selected value> -- select an option -- </option>');
-  }
-
-  resetSelectOptions(select) {
-    select.find('option').remove();
-  }
-
-  resetBeerList() {
-    $('.beer-list').find('.flip-container').remove();
-    $('.pagination').children().remove();
-  }
-
-  handleQuestionOneAction() {
-    var questionTwo = $('.question-two');
-    var selectedCategory = $('.question-one').val();
-    this.hideBeerCardContainer();
-    this.resetBeerList();
-    this.resetSelectOptions(questionTwo);
-    this.appendPlaceholderOption(questionTwo);
-    _.forEach(this.beerData.data, function(categoryStyle) {
-      if(categoryStyle.categoryId == selectedCategory) {
-        var categoryStyleOption = '<option value="' + categoryStyle.id + '">'+ categoryStyle.name + '</option>'
-        questionTwo.append(categoryStyleOption);
-      }
-    })
-    $('.question-two-container').show();
-  }
-
-  handleQuestionTwoAction() {
-    this.selectedCategoryStyle = $('.question-two').val();
-    var paramaters = '&styleId='+ this.selectedCategoryStyle + '&p=1&sort=ASC'
-    this.resetBeerList();
-    this.displayBeerCardContainer();
-    this.breweryDB.fetchBeers(paramaters)
-      .then((data) => { this.populateBeerContainer(data);})
-      .catch((error) => { this.populateBeerDataFailed(error);});
-  }
-
-  handlePageClick() {
-    var page = $(event.target).data('page-number');
-    var paramaters = '&styleId='+ this.selectedCategoryStyle + '&p='+ page + '&sort=ASC'
-    this.resetBeerList();
-    this.displayBeerCardContainer();
-    this.breweryDB.fetchBeers(paramaters)
-      .then((data) => { this.populateBeerContainer(data);})
-      .catch((error) => { this.populateBeerDataFailed(error);});
-  }
-
-
-  createPaging(data) {
-    if(data.numberOfPages == 1){ return; }
-    for (var i = 1; i <= data.numberOfPages; i++) {
-      if(data.currentPage == i) {
-        var page = '<a class="page-number selected" data-page-number='+ i +'>' + i + '</a>'
-      } else {
-        var page = '<a class="page-number" data-page-number='+ i +'>' + i + '</a>'
-      }
-      $('.pagination').append(page);
-    }
   }
 
   populateBeerContainer(data) {
@@ -147,13 +89,69 @@ class HomePage {
       ].join('');
       $('.beer-list').append(beerCard);
     })
-    this.createPaging(data);
+    this.generatePaging(data);
     this.bindEventsGeneratedContent();
+  }
 
+  resetSelectOptions(select) {
+    select.find('option').remove();
+  }
+
+  resetBeerList() {
+    $('.beer-list').find('.flip-container').remove();
+    $('.pagination').children().remove();
+  }
+
+  handleQuestionOneAction() {
+    var questionTwo = $('.question-two');
+    var selectedCategory = $('.question-one').val();
+    this.hideBeerCardContainer();
+    this.resetBeerList();
+    this.resetSelectOptions(questionTwo);
+    this.populatePlaceholderOption(questionTwo);
+    _.forEach(this.beerData.data, function(categoryStyle) {
+      if(categoryStyle.categoryId == selectedCategory) {
+        var categoryStyleOption = '<option value="' + categoryStyle.id + '">'+ categoryStyle.name + '</option>'
+        questionTwo.append(categoryStyleOption);
+      }
+    })
+    $('.question-two-container').show();
+  }
+
+  handleQuestionTwoAction() {
+    this.selectedCategoryStyle = $('.question-two').val();
+    var paramaters = '&styleId='+ this.selectedCategoryStyle + '&p=1&sort=ASC'
+    this.resetBeerList();
+    this.showBeerCardContainer();
+    this.breweryDB.fetchBeers(paramaters)
+      .then((data) => { this.populateBeerContainer(data);})
+      .catch((error) => { this.populateBeerDataFailed(error);});
+  }
+
+  handlePageClick() {
+    var page = $(event.target).data('page-number');
+    var paramaters = '&styleId='+ this.selectedCategoryStyle + '&p='+ page + '&sort=ASC'
+    this.resetBeerList();
+    this.showBeerCardContainer();
+    this.breweryDB.fetchBeers(paramaters)
+      .then((data) => { this.populateBeerContainer(data);})
+      .catch((error) => { this.populateBeerDataFailed(error);});
   }
 
   handleCardFlip () {
     $(event.target).closest('.flip-container').toggleClass('flipped');
+  }
+
+  generatePaging(data) {
+    if(data.numberOfPages == 1){ return; }
+    for (var i = 1; i <= data.numberOfPages; i++) {
+      if(data.currentPage == i) {
+        var page = '<a class="page-number selected" data-page-number='+ i +'>' + i + '</a>'
+      } else {
+        var page = '<a class="page-number" data-page-number='+ i +'>' + i + '</a>'
+      }
+      $('.pagination').append(page);
+    }
   }
 
   bindEventsGeneratedContent () {
