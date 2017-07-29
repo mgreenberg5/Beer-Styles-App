@@ -64,7 +64,7 @@ class HomePage {
       var ibuHTML = (typeof beer.ibu == 'undefined') ? '' : '<p class="ibu">IBU: <span class="bold">' + beer.ibu + '</span></p>';
       var ibuHTML = (typeof beer.ibu == 'undefined') ? '' : '<p class="ibu">IBU: <span class="bold">' + beer.ibu + '</span></p>';
       var glassHTML = (typeof beer.glass == 'undefined') ? '' : '<h5 class="glass">Serving: ' + beer.glass.name + '</h5>';
-      var descriptionHTML = (typeof beer.glass == 'undefined') ? '' : '<h5 class="glass">Serving: ' + beer.description + '</h5>';
+      var descriptionHTML = (typeof beer.glass == 'undefined') ? '' : '<h5 class="glass">' + beer.description + '</h5>';
       var flipArrowHTML = (typeof beer.glass == 'undefined' && typeof beer.glass == 'undefined') ? '' : '<img class="flip-arrow" src="/images/flip-arrow.png">';
       var beerCard = [
         '<div class="column flip-container">',
