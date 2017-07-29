@@ -73,24 +73,38 @@ class HomePage {
     _.forEach(data.data, function(beer) {
       var available = (typeof beer.available == 'undefined') ? null : beer.available.name
       var glass = (typeof beer.glass == 'undefined') ? null : beer.glass.name
-      var label = (typeof beer.labels == 'undefined') ? null : beer.labels.icon
+      var label = (typeof beer.labels == 'undefined') ? '/images/default-label.png' : beer.labels.medium
       var beerCard = [
-          '<div class="three columns md-break">',
-            '<img src="' + label + '"></h5>',
-            '<h5 class="">' + beer.name + '</h5>',
-            '<h5 class="">' + beer.abv + '</h5>',
-            '<h5 class="">' + beer.ibu + '</h5>',
-            '<h5 class="">' + beer.description + '</h5>',
-            '<h5 class="">' + beer.isOrganic + '</h5>',
-            '<h5 class="">' + available + '</h5>',
-            '<h5 class="">' + glass + '</h5>',
-          '</div>'
+        '<div class="three columns md-break flip-container">',
+          '<div class="flipper">',
+            '<div class="front">',
+              '<img class="logo" src="' + label + '"/>',
+              '<h3 class="name">' + beer.name + 't</h3>',
+              '<p class="available">Availability: <span class="bold">' + available + '</span></p>',
+              '<p class="abv">ABV: <span class="bold">' + beer.abv + '</span></p>',
+              '<p class="ibu">IBU: <span class="bold">' + beer.ibu + '</span></p>',
+              '<img class="flip-arrow" src="/images/flip-arrow.png">',
+            '</div>',
+            '<div class="back">',
+              '<h5 class="glass">Serving: ' + glass + '</h5>',
+              '<h5 class="description">' + beer.description + '</h5>',
+              '<img class="flip-arrow" src="/images/flip-arrow.png">',
+            '</div>',
+          '</div>',
+        '</div>'
       ].join('');
       $('.beer-list').append(beerCard);
     })
-
+    this.bindEventsGeneratedContent();
   }
 
+  handleCardFlip () {
+    $(this).toggleClass('flipped');
+  }
+
+  bindEventsGeneratedContent () {
+    $('.flip-container').on('click', this.handleCardFlip);
+  }
   bindEvents() {
     $('.question-one').on('change', this.handleQuestionOneAction.bind(this));
     $('.question-two').on('change', this.handleQuestionTwoAction.bind(this));
