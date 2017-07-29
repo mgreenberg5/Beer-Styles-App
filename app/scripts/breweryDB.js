@@ -24,9 +24,6 @@ class BreweryDB {
         url: this.breweryDBBaseUrl + api + '?format=json&key=' + this.breweryDBKey + paramaters
       }).promise();
     }
-    return $.ajax({
-      url: this.breweryDBBaseUrl + api + '?format=json&key=' + this.breweryDBKey
-    }).promise();
   }
 }
 
