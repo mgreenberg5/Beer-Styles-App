@@ -1,130 +1,126 @@
-.question-lable {
-  text-transform: uppercase;
-}
-.question-one-container {
-  margin-bottom: 50px;
-}
-.question-two-container {
-  display: none;
-}
-.beer-card-container {
-  display: none;
+.home {
+  .question-lable {
+    text-transform: uppercase;
+  }
+  .question-one-container {
+    margin-bottom: 50px;
+  }
+  .beer-card-container,
+  .question-two-container {
+    display: none;
+  }
   .pagination {
     display: inline-block;
     text-align: center;
-    a {
-      padding: 5px;
-      min-width: 25px;
-      display: inline-block;
-      border-radius: 5px;
-      &.selected {
-        background-color: $medium-gray;
-        color: $white;
+  }
+  .page-number {
+    padding: 5px;
+    min-width: 25px;
+    display: inline-block;
+    border-radius: 5px;
+    &.selected {
+      background-color: $medium-gray;
+      color: $white;
+    }
+  }
+  .flip-container,
+  .front,
+  .back {
+    width: 100%;
+    height: 300px;
+    border-radius: 10px;
+  }
+  .flip-container {
+    &.column {
+      width: 100%;
+      float: left;
+      margin-bottom: 50px;
+      @media #{$min-768} {
+        width: 46%;
+        margin-left: 2%;
+        margin-right: 2%;
+        margin-bottom: 100px;
+      }
+      @media #{$min-1024} {
+        width: 21%;
+        margin-left: 2%;
+        margin-right: 2%;
       }
     }
   }
-}
-// FLIP CONTAINER FUNCTIONALITY
-//-----------------------------------------------------------------
-.flip-container {
-  perspective: 1000px;
-  transform-style: preserve-3d;
-  .flipper {
-    transition: 0.3s;
-    transform-style: preserve-3d;
-    position: relative;
-  }
   .front,
   .back {
-    backface-visibility: hidden;
-    transition: 0.3s;
-    transform-style: preserve-3d;
-    position: absolute;
-    top: 0;
-    left: 0;
+    box-sizing: border-box;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.30);
+    padding: 20px;
+    .flip-arrow {
+      cursor: pointer;
+      position: absolute;
+      bottom: 5px;
+      right: 5px;
+      width: 20px;
+    }
   }
   .front{
+    text-align: center;
+    background-color: $white;
     z-index: 2;
-    transform: rotateY(0deg);
+    .logo {
+      max-height: 75px;
+      margin-bottom: 10px;
+    }
+    .abv,
+    .ibu {
+      display: inline-block;
+      margin: 0 10px;
+    }
+    .highlight {
+      color: $yellow;
+    }
   }
   .back {
-    transform: rotateY(-180deg);
+    background-color: $black;
+    color: $white;
   }
-}
-.flip-container.flipped .back {
-  transform: rotateY(0deg);
-}
-.flip-container.flipped .front {
-  transform: rotateY(180deg);
-}
-// FLIP CONTAINER STYLES
-//-----------------------------------------------------------------
-.flip-container,
-.front,
-.back {
-  width: 100%;
-  height: 300px;
-  border-radius: 10px;
-}
-.front,
-.back {
-  box-sizing: border-box;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.30);
-  padding: 20px;
-}
-.front{
-  text-align: center;
-  background-color: $white;
-  z-index: 2;
-  transform: rotateY(0deg);
-}
-.back {
-  background-color: $black;
-  color: $white;
-  transform: rotateY(-180deg);
-}
-.scroll-container {
-  overflow-y: scroll;
-  -webkit-overflow-scrolling: touch;
-  height: 100%;
-  &::-webkit-scrollbar {
-    display: none;
-  }
-}
-.flip-container {
-  &.column {
-    width: 100%;
-    float: left;
-    margin-bottom: 50px;
-    @media #{$min-768} {
-      width: 46%;
-      margin-left: 2%;
-      margin-right: 2%;
-      margin-bottom: 100px;
-    }
-    @media #{$min-1024} {
-      width: 21%;
-      margin-left: 2%;
-      margin-right: 2%;
+  .scroll-container {
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    height: 100%;
+    &::-webkit-scrollbar {
+      display: none;
     }
   }
-  .logo {
-    max-height: 75px;
-    margin-bottom: 10px;
+  // FLIP CONTAINER FUNCTIONALITY
+  //-----------------------------------------------------------------
+  .flip-container {
+    perspective: 1000px;
+    transform-style: preserve-3d;
+    .flipper {
+      transition: 0.3s;
+      transform-style: preserve-3d;
+      position: relative;
+    }
+    .front,
+    .back {
+      backface-visibility: hidden;
+      transition: 0.3s;
+      transform-style: preserve-3d;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .front{
+      z-index: 2;
+      transform: rotateY(0deg);
+    }
+    .back {
+      transform: rotateY(-180deg);
+    }
   }
-  .abv,
-  .ibu {
-    display: inline-block;
-    margin: 0 10px;
+  .flip-container.flipped .back {
+    transform: rotateY(0deg);
   }
-  .flip-arrow {
-    cursor: pointer;
-    position: absolute;
-    bottom: 5px;
-    right: 5px;
-    width: 20px;
-  }
-  .highlight {
-    color: $yellow;
+  .flip-container.flipped .front {
+    transform: rotateY(180deg);
   }
 }

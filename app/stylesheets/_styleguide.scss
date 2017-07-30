@@ -1,19 +1,12 @@
-.demo-layout {
-  .column, .columns {
-    padding-left: 10px;
-    box-sizing: border-box;
-    border: 1px solid $light-gray;
-    background: $light-gray;
-    margin-bottom: 20px;
-    border-radius: 5px;
-  }
-}
-.demo-colors {
-  .column, .columns {
-    box-sizing: border-box;
-    border: 1px solid $dark-gray;
-    height: 100px;
-    margin-bottom: 20px;
-    border-radius: 5px;
+.styleguide{
+  .demo-layout {
+    .column, .columns {
+      padding-left: 10px;
+      box-sizing: border-box;
+      border: 1px solid $light-gray;
+      background: $light-gray;
+      margin-bottom: 20px;
+      border-radius: 5px;
+    }
   }
 }
