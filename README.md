@@ -7,9 +7,9 @@
 * [http://www.brewerydb.com/](http://www.brewerydb.com/)
 * API Routed though [Amazon API Gateway](https://aws.amazon.com/api-gateway/) to enable CORS
 
-### CircleCI Integration:
+### CircleCI Continuous Integration:
 * [https://circleci.com/](https://circleci.com/)
-* Automatic pushes master to AWS S3 bucket upon merge.
+* Automatic deploys to AWS S3 bucket
 
 ### Build Tool:
 * This HTML5 application, built with [Brunch](http://brunch.io)
