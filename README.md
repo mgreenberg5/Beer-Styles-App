@@ -10,6 +10,7 @@
 ### CircleCI Continuous Integration:
 * [https://circleci.com/](https://circleci.com/)
 * Automatic deploys to AWS S3 bucket
+* Tests production for basic build errors
 
 ### Build Tool:
 * This HTML5 application, built with [Brunch](http://brunch.io)
