@@ -59,19 +59,18 @@ class HomePage {
     this.hideLoader();
     _.forEach(data.data, function(beer) {
       var logo = (typeof beer.labels == 'undefined') ? '/images/default-label.png' : beer.labels.medium
-      var availableHTML = (typeof beer.available == 'undefined') ? '' : '<p class="available">Availability: <span class="bold">' + beer.available.name + '</span></p>';
-      var abvHTML = (typeof beer.abv == 'undefined') ? '' : '<p class="abv">ABV: <span class="bold">' + beer.abv + '</span></p>';
-      var ibuHTML = (typeof beer.ibu == 'undefined') ? '' : '<p class="ibu">IBU: <span class="bold">' + beer.ibu + '</span></p>';
-      var ibuHTML = (typeof beer.ibu == 'undefined') ? '' : '<p class="ibu">IBU: <span class="bold">' + beer.ibu + '</span></p>';
+      var availableHTML = (typeof beer.available == 'undefined') ? '' : '<p class="available">Availability: <span class="highlight">' + beer.available.name + '</span></p>';
+      var abvHTML = (typeof beer.abv == 'undefined') ? '' : '<p class="abv">ABV: <span class="highlight">' + beer.abv + '</span></p>';
+      var ibuHTML = (typeof beer.ibu == 'undefined') ? '' : '<p class="ibu">IBU: <span class="highlight">' + beer.ibu + '</span></p>';
       var glassHTML = (typeof beer.glass == 'undefined') ? '' : '<h5 class="glass">Serving: ' + beer.glass.name + '</h5>';
-      var descriptionHTML = (typeof beer.glass == 'undefined') ? '' : '<h5 class="glass">' + beer.description + '</h5>';
-      var flipArrowHTML = (typeof beer.glass == 'undefined' && typeof beer.glass == 'undefined') ? '' : '<img class="flip-arrow" src="/images/flip-arrow.png">';
+      var descriptionHTML = (typeof beer.description == 'undefined') ? '' : '<h5 class="description">' + beer.description + '</h5>';
+      var flipArrowHTML = (typeof beer.glass == 'undefined' && typeof beer.description == 'undefined') ? '' : '<img class="flip-arrow" src="/images/flip-arrow.png">';
       var beerCard = [
         '<div class="column flip-container">',
           '<div class="flipper">',
             '<div class="front">',
               '<img class="logo" src="' + logo + '"/>',
-              '<h3 class="name">' + beer.name + '</h3>',
+              '<h4 class="name">' + beer.name + '</h4>',
               availableHTML,
               abvHTML,
               ibuHTML,

@@ -1,14 +1,17 @@
-## Beer App
+## Beer Styles App
 
-### Production URL:
+### AWS Production URL:
 * [http://beer-app.s3-website-us-east-1.amazonaws.com/](http://beer-app.s3-website-us-east-1.amazonaws.com/)
 
 ### API EndPoint:
 * [http://www.brewerydb.com/](http://www.brewerydb.com/)
 * API Routed though [Amazon API Gateway](https://aws.amazon.com/api-gateway/) to enable CORS
 
+### CircleCI Intergration:
+* [https://circleci.com/](https://circleci.com/)
+
 ### Build Tool:
-* This HTML5 application, built with [Brunch](http://brunch.io).
+* This HTML5 application, built with [Brunch](http://brunch.io)
 
 ### Install and/or update:
 * [Node.js](http://nodejs.org) (On mac, you can install via [homebrew](http://brew.sh/): `brew install node`)
