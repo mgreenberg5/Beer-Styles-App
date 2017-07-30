@@ -1,7 +1,7 @@
 ## Beer Styles App
 
 ### AWS Production URL:
-* View the final product here [http://beer-app.s3-website-us-east-1.amazonaws.com/](http://beer-app.s3-website-us-east-1.amazonaws.com/)
+* Click URL to view the Beer Styles App [http://beer-app.s3-website-us-east-1.amazonaws.com/](http://beer-app.s3-website-us-east-1.amazonaws.com/)
 
 ### API EndPoint:
 * [http://www.brewerydb.com/](http://www.brewerydb.com/)
