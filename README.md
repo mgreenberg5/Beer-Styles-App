@@ -23,13 +23,13 @@
 * Clone this git repo `https://github.com/mgreenberg5/WebApp`
 * Run `npm install` to install app dependencies and brunch plugins
 
-### Configure:
-* If you need to add plugins or modules to this instance of brunch, you can do so via `npm install --save module`
-* Plugin and module configurations are added to brunch-config.js
-
 ### Run:
 * `npm start` - Runs the `brunch watch --server --port 3333` command to watch the project with continuous rebuild. This will also launch HTTP server with [pushState](https://developer.mozilla.org/en-US/docs/Web/Guide/API/DOM/Manipulating_the_browser_history) at [localhost:3333](http://localhost:3333).
 * `brunch build --production` builds the minified project for production
+
+### Configure:
+* If you need to add plugins or modules to this instance of brunch, you can do so via `npm install --save module`
+* Plugin and module configurations are added to brunch-config.js
 
 ### Learn:
 * `public/` dir is fully auto-generated and served by HTTP server. Write your code in `app/` dir.
